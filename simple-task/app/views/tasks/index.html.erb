@@ -1,0 +1,48 @@
+<h1>Tasks List</h1>
+
+<div class="mb-5">
+  <span><%= link_to("New Task", new_task_path, class: "btn btn-primary") %></span>
+  <span><%= link_to("Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary") %></span>
+</div>
+
+<% if @tasks.count > 0 %>
+
+<div style="padding:3px">
+  <table class="table" style="width:100%; height:auto; padding:3px">
+    <thead class="thead-dark">
+      <tr style="height:50px">
+        <th style="width:5%">Title</th>
+        <th style="width:20%">Title</th>
+        <th style="width:10%">Client</th>
+        <th style="width:10%">Duration (Hours)</th>
+        <th style="width:10%">Status</th>
+        <th style="width:30%">Action</th>
+      </tr>
+    </thead>
+    <% @tasks.each do |task| %>
+    <tbody>
+      <tr style="height:60px">
+        <td style="width:5%;padding:5px,text-align:center;">
+          <%= form_with(model: task, method: :patch) do |form| %>
+             <%= form.check_box :status, {onclick: "this.form.submit()"}, Task.statuses.key(1), Task.statuses.key(0) %>
+          <% end %>
+        </td>
+        <td style="width:20%;padding:5px,text-align:center;"><%= task.title %></td>
+        <td style="width:10%;padding:5px,text-align:center;"><%= task.client %></td>
+        <td style="width:10%;padding:5px,text-align:center;"><%= task.duration %></td>
+        <td style="width:10%;padding:5px,text-align:center;">
+          <%= task.status.capitalize %>
+        </td>
+        <td style="width:30%;padding:5px,text-align:center;">
+          <%= link_to(link_to "View", task_path(task), class: "btn btn-info")  %>
+          <%= link_to("Edit", edit_task_path(task), class: "btn btn-info")  %>
+          <%= link_to("Delete", task_path(task), method: :delete, class: "btn btn-info", data: {confirm: "Are you sure to delete this task?"})  %>
+        </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+</div>
+<% else %>
+<h3> There is no tasks. Please click the "New Task" button to create task. </h3>
+<% end %>
