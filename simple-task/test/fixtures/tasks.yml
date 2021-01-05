@@ -4,7 +4,7 @@ one:
   title: Test Task 1
   body: This is the body of Test Task 1
   client: NorthSail
-  duration: 10
+  duration: 11
   status: 0
   user_id: 1
 
@@ -12,6 +12,6 @@ two:
   title: Test Task 2
   body: This is the body of Test Task 2
   client: Molson
-  duration: 20
+  duration: 22
   status: 1
   user_id: 2
