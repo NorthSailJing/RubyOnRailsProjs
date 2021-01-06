@@ -11,6 +11,7 @@ FactoryBot.define do
     client {"NorthSail"}
     duration {20}
     status {1}
+    user
   end
 
 end

@@ -14,5 +14,5 @@
 <% if @tasks.any? %>
   <%= render "task_list" %>
 <% else %>
-  <h3> There is no tasks. Please click the "New Task" button to create task. </h3>
+  <h3> There is no tasks. Please click <%= link_to "New Task", new_task_path, class: "btn btn-primary" %> button to create task. </h3>
 <% end %>
