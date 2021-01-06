@@ -45,6 +45,8 @@ RSpec.describe "tasks management", type: :system do
 
     expect(Task.count).to eq(1)
     expect(Task.all.first.title).to eq(@task.title)
+    expect(Task.all.first.client).to eq(@task.client)
+    expect(Task.all.first.status).to eq(@task.status)
   end
 
   it "user can edit an existing task" do
@@ -63,6 +65,8 @@ RSpec.describe "tasks management", type: :system do
     end
 
     fill_in "task_title", with: @task.title + '!'
+    select "Molson"
+    uncheck "task_status"
     click_on "Update Task"
 
     within('h1') do
@@ -71,6 +75,8 @@ RSpec.describe "tasks management", type: :system do
 
     expect(Task.count).to eq(1)
     expect(Task.all.first.title).to eq(@task.title + '!')
+    expect(Task.all.first.client).to eq("Molson")
+    expect(Task.all.first.status).to eq("pending")
   end
 
   it "user can delete an existing task" do
