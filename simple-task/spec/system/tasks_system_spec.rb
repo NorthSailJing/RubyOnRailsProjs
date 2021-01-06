@@ -2,13 +2,7 @@ require "rails_helper"
 
 RSpec.describe "tasks management", type: :system do
   let(:user) { create(:user) }
-
-  def create_a_task
-    task = build(:task)
-    @task = user.tasks.build({title: task.title, body: task.body, client: task.client, duration: task.duration, status: task.status, user_id: user.id})
-    @task.save
-  end
-
+  
   before do
     sign_in(user)
   end  
@@ -22,35 +16,37 @@ RSpec.describe "tasks management", type: :system do
       visit root_path
       click_on "New Task"
 
-      @task = build(:task)
-      fill_in "task_title", with: @task.title
-      fill_in "task_body", with: @task.body
-      select @task.client
-      fill_in "task_duration", with: @task.duration
+      task = build(:task)
+      fill_in "task_title", with: task.title
+      fill_in "task_body", with: task.body
+      select task.client
+      fill_in "task_duration", with: task.duration
       check "task_status"
 
       click_on "Create Task"
 
-      expect(page).to have_content(@task.title)
+      expect(page).to have_content(task.title)
     end 
   end
 
   context "edit task" do
+    let!(:task) { create(:task, user: user) }
+
     it "edit an existing task" do
-      create_a_task
       visit root_path
       click_on "Edit"
 
-      fill_in "task_title", with: @task.title + '!'
+      fill_in "task_title", with: task.title + '!'
       click_on "Update Task"
       
-      expect(page).to have_content(@task.title + '!')     
+      expect(page).to have_content(task.title + '!')     
     end  
   end
 
   context "delete task" do
+    let!(:task) { create(:task, user: user) }
+
     it "delete an existing task" do
-      create_a_task
       visit root_path
 
       accept_confirm do
