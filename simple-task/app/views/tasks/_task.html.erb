@@ -1,0 +1,18 @@
+<tr style="height:60px">
+    <td style="width:5%;padding:5px,text-align:center;">
+        <%= form_with(model: task, method: :patch) do |form| %>
+            <%= form.check_box :status, {onclick: "this.form.submit()"}, Task.statuses.key(1), Task.statuses.key(0) %>
+        <% end %>
+    </td>
+    <td style="width:20%;padding:5px,text-align:center;"><%= task.title %></td>
+    <td style="width:10%;padding:5px,text-align:center;"><%= task.client %></td>
+    <td style="width:10%;padding:5px,text-align:center;"><%= task.duration %></td>
+    <td style="width:10%;padding:5px,text-align:center;">
+        <%= task.status.capitalize %>
+    </td>
+    <td style="width:30%;padding:5px,text-align:center;">
+        <%= link_to(link_to "View", task_path(task), class: "btn btn-info")  %>
+        <%= link_to("Edit", edit_task_path(task), class: "btn btn-info")  %>
+        <%= link_to("Delete", task_path(task), method: :delete, class: "btn btn-info", data: {confirm: "Are you sure to delete this task?"})  %>
+    </td>
+</tr>

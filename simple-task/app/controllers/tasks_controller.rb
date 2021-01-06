@@ -8,13 +8,13 @@ class TasksController < ApplicationController
   def show; end
 
   def new
-    @task = current_user.tasks.build
+    @task = Task.new
   end
 
   def create
     @task = current_user.tasks.build(tasks_params)
     if @task.save
-      redirect_to(tasks_path)
+      redirect_to tasks_path, notice: "Task created"
     else
       render('new')
     end
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(tasks_params)
-      redirect_to(tasks_path)
+      redirect_to tasks_path, notice: "Task updated"
     else
       render('edit')
     end
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to(tasks_path)
+    redirect_to tasks_path, notice: "Task deleted"
   end
 
 private

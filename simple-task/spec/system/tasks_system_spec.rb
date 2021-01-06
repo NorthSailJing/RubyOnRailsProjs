@@ -20,15 +20,7 @@ RSpec.describe "tasks management", type: :system do
   it "user can add a new task" do
     visit root_path
 
-    within('h1') do
-      expect(page).to have_content('Tasks List')
-    end
-
     click_on "New Task"
-
-    within('h1') do
-      expect(page).to have_content('Create New Task')
-    end
 
     @task = build(:task)
     fill_in "task_title", with: @task.title
@@ -43,7 +35,6 @@ RSpec.describe "tasks management", type: :system do
       expect(page).to have_content('Tasks List')
     end
 
-    expect(Task.count).to eq(1)
     expect(Task.all.first.title).to eq(@task.title)
     expect(Task.all.first.client).to eq(@task.client)
     expect(Task.all.first.status).to eq(@task.status)
@@ -54,24 +45,14 @@ RSpec.describe "tasks management", type: :system do
 
     visit root_path
 
-    within('h1') do
-      expect(page).to have_content('Tasks List')
-    end
-
     click_on "Edit"
 
-    within('h1') do
-      expect(page).to have_content('Update the Task')
-    end
 
     fill_in "task_title", with: @task.title + '!'
     select "Molson"
     uncheck "task_status"
     click_on "Update Task"
 
-    within('h1') do
-      expect(page).to have_content('Tasks List')
-    end
 
     expect(Task.count).to eq(1)
     expect(Task.all.first.title).to eq(@task.title + '!')
