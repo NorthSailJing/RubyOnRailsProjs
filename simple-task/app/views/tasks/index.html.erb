@@ -11,6 +11,10 @@
     </div>
 <% end %>
 
+<div>
+  Total completed hours: <b><%= @completed_hours %></b>
+</div>
+
 <% if @tasks.any? %>
   <%= render "task_list" %>
 <% else %>

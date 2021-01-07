@@ -16,7 +16,7 @@ RSpec.describe "tasks management", type: :system do
 
     before do 
       visit root_path
-      click_on "New Task"
+      click_on "New Task", match: :first
       fill_in "task_title", with: task.title
       fill_in "task_body", with: task.body
       select task.client
@@ -32,7 +32,7 @@ RSpec.describe "tasks management", type: :system do
 
   context "edit task" do
     let!(:task) { create(:task, user: user) }
-
+    
     before do 
       visit root_path
       click_on "Edit"   

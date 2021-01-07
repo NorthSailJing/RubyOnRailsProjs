@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, except: [:index, :new, :create]
 
   def index
+    @completed_hours = current_user.tasks.completed_hours
     @tasks = current_user.tasks.by_state
   end
 
