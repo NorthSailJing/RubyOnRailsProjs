@@ -32,7 +32,7 @@ RSpec.describe "tasks management", type: :system do
 
   context "edit task" do
     let!(:task) { create(:task, user: user) }
-    
+
     before do 
       visit root_path
       click_on "Edit"   
@@ -59,6 +59,20 @@ RSpec.describe "tasks management", type: :system do
     it "delete an existing task" do
       expect(page).to have_content('There is no tasks.')
     end  
+  end
+
+  context "when visiting the tasks list page" do
+    let(:user) { create(:user) }
+    let!(:completed_task) { create_list(:task, 3, user: user, status: 1) }
+    let!(:uncompleted_task) { create_list(:task, 2, user: user, status: 0) }
+    
+    before do
+      visit root_path
+    end  
+
+    it "shows the completed hours" do
+      expect(page).to have_content("Total completed hours: 60")
+    end
   end
   
 end
