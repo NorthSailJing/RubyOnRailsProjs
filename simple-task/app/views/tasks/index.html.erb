@@ -2,6 +2,7 @@
 
 <div class="mb-5">
   <span><%= link_to("New Task", new_task_path, class: "btn btn-primary") %></span>
+  <span><%= link_to("Download Tasks List", download_tasks_path, class: "btn btn-primary") %></span>
   <span><%= link_to("Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary") %></span>
 </div>
 
@@ -12,7 +13,7 @@
 <% end %>
 
 <div>
-  Total completed hours: <b><%= @completed_hours %></b>
+  Total completed hours: <b><%= @completed_hours %></b> <%=@path_to_file%> 
 </div>
 
 <% if @tasks.any? %>

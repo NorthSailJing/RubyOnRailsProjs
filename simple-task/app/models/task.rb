@@ -8,4 +8,17 @@ class Task < ApplicationRecord
 
   validates_presence_of :title, :body, :client, :duration
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10000 }
+
+  def self.to_csv
+    attributes  = %w{id title body client duration status}
+
+    CSV.generate(headers: true, row_sep: "\r\n", col_sep: "|") do |csv|
+      csv << attributes 
+
+      all.each do |task|
+        csv << attributes.map{ |attr| task.send(attr) } 
+      end  
+    end   
+  end  
+
 end
