@@ -1,4 +1,5 @@
 require "rails_helper"
+require "selenium/webdriver"
 require "csv"
 
 RSpec.describe "tasks management", type: :system do
@@ -76,6 +77,7 @@ RSpec.describe "tasks management", type: :system do
 
   context "when clicking the download link" do
     let(:path_to_file) {"c:/users/jinglun/downloads/tasks-#{Date.today}.csv"}
+    let!(:task) { create(:task, user: user) }
 
     before do
       File.delete(path_to_file) if File.exist?(path_to_file)
@@ -91,8 +93,13 @@ RSpec.describe "tasks management", type: :system do
     
     it "generates the correct header" do
       header = CSV.open(path_to_file, 'r') { |csv| csv.first.to_s }
-      expect(header).to eq("[\"id|title|body|client|duration|status\"]")
-    end  
+      expect(header).to eq("[\"title|body|client|duration|status\"]")
+    end
+
+    it "generates the correct content" do
+      content = CSV.open(path_to_file, 'r').drop(1) { |csv| csv.first.to_s }
+      expect(content).to eq([[task.title + "|" + task.body + "|" + task.client + "|" + task.duration.to_s + "|" + task.status]])
+    end   
 
   end 
 

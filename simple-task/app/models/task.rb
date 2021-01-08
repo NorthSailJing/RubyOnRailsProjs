@@ -10,7 +10,7 @@ class Task < ApplicationRecord
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 10000 }
 
   def self.to_csv
-    attributes  = %w{id title body client duration status}
+    attributes  = %w{title body client duration status}
 
     CSV.generate(headers: true, row_sep: "\r\n", col_sep: "|") do |csv|
       csv << attributes 
