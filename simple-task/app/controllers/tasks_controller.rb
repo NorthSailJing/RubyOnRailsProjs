@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, except: [:index, :new, :create, :download]
-  before_action :pull_all_tasks, only: :download
+  before_action :set_task, except: [:index, :new, :create, :download, :chart]
+  before_action :pull_all_tasks, only: [:download, :chart]
 
   def index
     @completed_hours = current_user.tasks.completed_hours
@@ -40,6 +40,8 @@ class TasksController < ApplicationController
   def download    
       send_data @tasks.to_csv, filename: "tasks-#{Date.today}.csv"
   end  
+
+  def chart; end  
 
 private
 

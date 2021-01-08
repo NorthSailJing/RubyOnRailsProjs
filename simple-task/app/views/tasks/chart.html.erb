@@ -1,0 +1,11 @@
+<h1>Task Charts</h1>
+
+<div class="mb-5">
+  <span><%= link_to("Back to List", tasks_path, class: "btn btn-primary") %></span>
+</div>
+
+<h3>Tickets number by Clients</h3>
+<%= pie_chart @tasks.group(:client).count %>
+
+<h3>Tickets number by Hours</h3>
+<%= column_chart @tasks.group(:client).sum(:duration) %>
