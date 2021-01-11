@@ -1,3 +1,5 @@
+require 'CSV'
+
 class TasksController < ApplicationController
   before_action :set_task, except: [:index, :new, :create, :download, :chart]
   before_action :pull_all_tasks, only: [:download, :chart]
@@ -54,7 +56,7 @@ private
   end
 
   def pull_all_tasks
-    @tasks = Task.all
+    @tasks = current_user.tasks.all
   end  
 
 end
