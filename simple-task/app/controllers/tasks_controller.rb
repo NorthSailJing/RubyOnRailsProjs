@@ -1,12 +1,14 @@
 require 'CSV'
 
 class TasksController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_task, except: [:index, :new, :create, :download, :chart]
   before_action :pull_all_tasks, only: [:download, :chart]
 
   def index
     @completed_hours = current_user.tasks.completed_hours
-    @tasks = current_user.tasks.by_state
+    @pagy, @tasks = pagy(current_user.tasks.by_state, items: 10)
   end
 
   def show; end

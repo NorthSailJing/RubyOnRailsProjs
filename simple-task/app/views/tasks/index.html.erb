@@ -19,6 +19,7 @@
 
 <% if @tasks.any? %>
   <%= render "task_list" %>
+  <%= pagy_bootstrap_nav(@pagy).html_safe %>
 <% else %>
   <h3> There is no tasks. Please click <%= link_to "New Task", new_task_path, class: "btn btn-primary" %> button to create task. </h3>
 <% end %>
