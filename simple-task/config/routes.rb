@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       get :download
       get :chart
+      get :calendar
     end  
   end  
 

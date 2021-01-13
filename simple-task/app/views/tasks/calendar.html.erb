@@ -1,0 +1,15 @@
+<h1>Task Calendar</h1>
+
+<div class="mb-5">
+  <span><%= link_to("Back to List", tasks_path, class: "btn btn-primary") %></span>
+</div>
+
+<%= month_calendar(attribute: :entered_on, events: @tasks) do |date, tasks| %>
+    <%= date %>
+
+    <% tasks.each do |task| %>
+        <div>
+            * <%= task.title %>
+        </div>
+    <% end %>    
+<% end %>

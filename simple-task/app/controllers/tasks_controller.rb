@@ -3,8 +3,8 @@ require 'CSV'
 class TasksController < ApplicationController
   include Pagy::Backend
 
-  before_action :set_task, except: [:index, :new, :create, :download, :chart]
-  before_action :pull_all_tasks, only: [:download, :chart]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :pull_all_tasks, only: [:download, :chart, :calendar]
 
   def index
     @completed_hours = current_user.tasks.completed_hours
@@ -46,6 +46,8 @@ class TasksController < ApplicationController
   end  
 
   def chart; end  
+
+  def calendar; end
 
 private
 

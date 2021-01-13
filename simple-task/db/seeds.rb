@@ -16,7 +16,8 @@ tks << {
   body: Faker::Lorem.paragraph(sentence_count: rand(1..3)),
   client: ["NorthSail", "Molson", "Merge"].sample,
   duration: rand(1..100),
-  status: rand(0..1)
+  status: rand(0..1),
+  entered_on: rand(1..365).days.ago
 }}
 
 user.tasks.create(tks)

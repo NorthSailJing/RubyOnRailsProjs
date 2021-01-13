@@ -2,7 +2,8 @@
 
 <div class="mb-5">
   <span><%= link_to("New Task", new_task_path, class: "btn btn-primary") %></span>
-  <span><%= link_to("Charts", chart_tasks_path, class: "btn btn-primary") %></span>
+  <span><%= link_to("Task Charts", chart_tasks_path, class: "btn btn-primary") %></span>
+  <span><%= link_to("Task Calendar", calendar_tasks_path, class: "btn btn-primary") %></span>
   <span><%= link_to("Download Tasks List", download_tasks_path, class: "btn btn-primary") %></span>
   <span><%= link_to("Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary") %></span>
 </div>
