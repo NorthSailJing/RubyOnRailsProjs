@@ -1,5 +1,3 @@
-require 'CSV'
-
 class TasksController < ApplicationController
   include Pagy::Backend
 
@@ -8,7 +6,7 @@ class TasksController < ApplicationController
 
   def index
     @completed_hours = current_user.tasks.completed_hours
-    @pagy, @tasks = pagy(current_user.tasks.by_state, items: 10)
+    @pagy, @tasks = pagy(current_user.tasks.with_client.by_state, items: 10)
   end
 
   def show; end
@@ -52,15 +50,15 @@ class TasksController < ApplicationController
 private
 
   def tasks_params
-    params.require(:task).permit(:title, :body, :client, :duration, :status)
+    params.require(:task).permit(:title, :body, :client_id, :duration, :status)
   end
 
   def set_task
-    @task = current_user.tasks.find(params[:id])
+    @task = current_user.tasks.with_client.find(params[:id])
   end
 
   def pull_all_tasks
-    @tasks = current_user.tasks.all
+    @tasks = current_user.tasks.with_client.all
   end  
 
 end

@@ -4,7 +4,7 @@
     <div class="p-2">
       <h3 class="card-title mb-4"><%= @task.title %></h3>
       <h4 class="card-subtitle mb-4 text-muted">
-        <%= @task.client %> | <%= @task.duration %> hour(s) |
+        <%= @task.client.name %> | <%= @task.duration %> hour(s) |
         <%= @task.status.capitalize %>
       </h4>
       <p class="card-text mb-4"><%= @task.body %></p>

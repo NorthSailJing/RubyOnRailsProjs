@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :client do
+    name { "NorthSail" }
+    bill_rate { 100 }
+  end
+
 
   factory :user do
     email {"jing@northsail.io"}

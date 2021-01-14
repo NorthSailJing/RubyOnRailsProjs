@@ -5,7 +5,7 @@
 </div>
 
 <h3>Tickets number by Clients</h3>
-<%= pie_chart @tasks.group(:client).count %>
+<%= pie_chart @tasks.joins(:client).group(:name).count %>
 
 <h3>Tickets number by Hours</h3>
-<%= column_chart @tasks.group(:client).sum(:duration) %>
+<%= column_chart  @tasks.joins(:client).group(:name).sum(:duration) %>

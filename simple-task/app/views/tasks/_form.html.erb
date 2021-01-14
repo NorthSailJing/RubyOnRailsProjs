@@ -18,7 +18,7 @@
 
   <div class="form-group">
     <%= form.label :client, "Client:" %>
-    <%= form.select :client, ["NorthSail", "Molson", "Merge"], {include_blank: "Select a client"}, {class: "form-control"} %>
+    <%= form.select :client_id, Client.all.collect { |c| [c.name, c.id]}, {include_blank: "Select a client"}, { class: "form-control" } %>
     <% @task.errors.full_messages_for(:client).each do |message| %>
         <span style="color: red"><%= message %><br/></span>
     <% end %>
