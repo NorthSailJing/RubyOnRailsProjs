@@ -17,7 +17,7 @@ development:
   database: simple-task-development
   schema: public
   username: postgres
-  password: 58Ninety!
+  password: 58ninety!
 
 
 # Warning: The database defined as "test" will be erased and
@@ -30,7 +30,7 @@ test:
   database: simple-task-test
   schema: public
   username: postgres
-  password: 58Ninety!
+  password: 58ninety!
 
 
 production:
@@ -40,4 +40,4 @@ production:
   database: simple-task-production
   schema: public
   username: postgres
-  password: 58Ninety!
+  password: 58ninety!
